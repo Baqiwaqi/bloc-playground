@@ -38,7 +38,7 @@ class TimerActions extends StatelessWidget {
             timerBloc.add(TimerPaused())
         ),
         FloatingActionButton(
-          heroTag: 'reset',
+          heroTag: 'reset2',
           child: Icon(Icons.replay),
           onPressed: () =>
               timerBloc.add(TimerReset())

@@ -2,7 +2,7 @@ import 'package:direct_navigation/bloc/bloc.dart';
 import 'package:direct_navigation/pages/page_a.dart';
 import 'package:direct_navigation/pages/page_b.dart';
 import 'package:direct_navigation/pages/timer.dart';
-import 'package:direct_navigation/repositories/ticker.dart';
+import 'package:direct_navigation/service/ticker.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
