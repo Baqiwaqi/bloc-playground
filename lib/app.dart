@@ -45,6 +45,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void dispose() {
     _counterBloc.close();
+    //Necesaary?? _timerBloc.close();
+    _timerBloc.close();
     super.dispose();
   }
 }
