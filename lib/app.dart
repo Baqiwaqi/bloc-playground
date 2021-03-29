@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:direct_navigation/bloc/bloc.dart';
+import 'package:direct_navigation/cubit/counter_cubit.dart';
 import 'package:direct_navigation/pages/page_a.dart';
 import 'package:direct_navigation/pages/page_b.dart';
 import 'package:direct_navigation/pages/timer.dart';
@@ -13,7 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final _counterBloc = CounterBloc();
+  final _counterBloc = CounterCubit();
   final _timerBloc = TimerBloc(ticker: Ticker());
 
   @override

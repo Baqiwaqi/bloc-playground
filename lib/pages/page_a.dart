@@ -1,4 +1,4 @@
-import 'package:direct_navigation/bloc/bloc.dart';
+import 'package:direct_navigation/cubit/counter_cubit.dart';
 import 'package:direct_navigation/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,43 +6,59 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class PageA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final counterBloc = BlocProvider.of<CounterBloc>(context);
+    final counterCubit = BlocProvider.of<CounterCubit>(context);
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Page A'),
       ),
       drawer: SideMenu(),
-      body: BlocBuilder<CounterBloc, int>(
-        builder: (context, count) {
-          return Center(
-            child: Text('$count'),
-          );
-        },
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text("The counter is pressed this many times: "),
+            BlocConsumer<CounterCubit, CounterState>(builder: (context, state) {
+              return Text(
+                '${state.counterValue}',
+              );
+            }, listener: (context, state) {
+              if (state.wasIncremented) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Incremented!!'),
+                    duration: Duration(milliseconds: 300),
+                  ),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Decremented!!'),
+                    duration: Duration(milliseconds: 300)
+                  ),
+                );
+              }
+            })
+          ],
+        ),
       ),
-      floatingActionButton: Column(
+      floatingActionButton: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 5.0),
-            child: FloatingActionButton(
-              heroTag: 0,
-              child: Icon(Icons.add),
-              onPressed: () {
-                counterBloc.add(CounterEvent.increment);
-              },
-            ),
+        children: [
+          FloatingActionButton(
+            heroTag: 0,
+            child: Icon(Icons.add),
+            onPressed: () => counterCubit.increment(),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 5.0),
-            child: FloatingActionButton(
-              heroTag: 1,
-              child: Icon(Icons.remove),
-              onPressed: () {
-                counterBloc.add(CounterEvent.decrement);
-              },
-            ),
+          SizedBox(
+            width: 16.0,
+          ),
+          FloatingActionButton(
+            heroTag: 1,
+            child: Icon(Icons.remove),
+            onPressed: () => counterCubit.decrement(),
           ),
         ],
       ),

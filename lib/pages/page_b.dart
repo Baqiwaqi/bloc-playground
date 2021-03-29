@@ -1,4 +1,4 @@
-import 'package:direct_navigation/bloc/counter_bloc.dart';
+import 'package:direct_navigation/cubit/counter_cubit.dart';
 import 'package:direct_navigation/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +11,10 @@ class PageB extends StatelessWidget {
         title: Text('page B'),
       ),
       drawer: SideMenu(),
-      body: BlocBuilder<CounterBloc, int>(
-        builder: (context, count) {
+      body: BlocBuilder<CounterCubit, CounterState>(
+        builder: (context, state) {
           return Center(
-            child: Text('$count'),
+            child: Text('${state.counterValue}'),
           );
         },
       ),
