@@ -8,3 +8,5 @@ class StateA extends MyState {}
 class StateB extends MyState {}
 
 class StateTimer extends MyState {}
+
+class StateRockets extends MyState {}

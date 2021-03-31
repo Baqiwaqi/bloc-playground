@@ -23,6 +23,9 @@ class MyBloc extends Bloc<MyEvent, MyState> {
       case MyEvent.Timer:
         yield StateTimer();
         break;
+      case MyEvent.Rockets:
+        yield StateRockets();
+        break;
     }
   }
 }

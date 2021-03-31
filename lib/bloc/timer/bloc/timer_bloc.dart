@@ -17,7 +17,7 @@ class TimerBloc extends Bloc<TimerEvent, TimerState> {
         super(TimerInitial(_duration));
 
   // TimerInitial state Duration of 1 minute (60 seconds).
-  static int _duration = 10;
+  static int _duration = 1800;
 
   // we need to define the dependency on our Ticker.
   final Ticker _ticker;

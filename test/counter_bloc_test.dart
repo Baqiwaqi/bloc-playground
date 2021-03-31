@@ -21,14 +21,14 @@ void main() {
     blocTest(
       'emits [1] when increment is added', 
       build: () => counterCubit,
-      act: (bloc) => bloc.add(CounterCubit().increment),
+      act: (cubit) => counterCubit.increment(),
       expect: () => [1],
     );
 
     blocTest(
       'emits [-1] decrement is added',
        build: () => counterCubit,
-       act: (bloc) => bloc.add(CounterCubit().decrement),
+       act: (cubit) => counterCubit.decrement(),
        expect: () => [-1],
     );
     

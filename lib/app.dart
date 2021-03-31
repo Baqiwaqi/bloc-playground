@@ -5,19 +5,29 @@ import 'package:direct_navigation/cubit/counter_cubit.dart';
 import 'package:direct_navigation/pages/page_a.dart';
 import 'package:direct_navigation/pages/page_b.dart';
 import 'package:direct_navigation/pages/timer.dart';
+import 'package:direct_navigation/rocket/bloc/rocket_bloc.dart';
+import 'package:direct_navigation/rocket/data/models/rocket_model.dart';
+import 'package:direct_navigation/rocket/data/repositories/rocket_repository.dart';
+import 'package:direct_navigation/rocket/presentation/screens/rocket_screen.dart';
 import 'package:direct_navigation/service/ticker.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
+class MyApp extends StatelessWidget {
+  MyApp({
+    Key key,
+    @required this.rocketRepository,
+  });
 
-class _MyAppState extends State<MyApp> {
+  final RocketRepository rocketRepository;
+
+  
   final _counterBloc = CounterCubit();
+
   final _timerBloc = TimerBloc(ticker: Ticker());
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -32,24 +42,25 @@ class _MyAppState extends State<MyApp> {
               value: _counterBloc,
               child: PageA(),
             ),
-        '/pageB': (context) => BlocProvider.value(
-              value: _counterBloc,
+        '/pageB': (context) => MultiBlocProvider(
+              providers: [
+                BlocProvider.value(value: _counterBloc),
+                BlocProvider.value(value: _timerBloc)
+              ],
               child: PageB(),
             ),
         '/timer': (context) => BlocProvider.value(
-              value: _timerBloc, 
+              value: _timerBloc,
               child: Timer(),
+            ),
+        '/rockets': (context) => BlocProvider(
+              create: (context) => RocketBloc(rocketRepository: rocketRepository),
+              child: RocketScreen(),
             ),
       },
       initialRoute: '/',
     );
   }
 
-  @override
-  void dispose() {
-    _counterBloc.close();
-    //Necesaary?? _timerBloc.close();
-    _timerBloc.close();
-    super.dispose();
-  }
+ 
 }

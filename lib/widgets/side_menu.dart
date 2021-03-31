@@ -19,6 +19,9 @@ class SideMenu extends StatelessWidget {
         if (state is StateA) {
           Navigator.of(context).popUntil((route) => route.isFirst);
         }
+        if (state is StateRockets) {
+          Navigator.of(context).pushNamed('/rockets');
+        }
 
       },
       child: Drawer(
@@ -35,7 +38,7 @@ class SideMenu extends StatelessWidget {
               },
             ),
             ListTile(
-              title: Text('PageB'),
+              title: Text('Combine page'),
               onTap: () {
                 BlocProvider.of<MyBloc>(context).add(MyEvent.eventB);
               },
@@ -44,6 +47,12 @@ class SideMenu extends StatelessWidget {
               title: Text('Timer'),
               onTap: () {
                 BlocProvider.of<MyBloc>(context).add(MyEvent.Timer);
+              },
+            ),
+            ListTile(
+              title: Text('Rockets'),
+              onTap: () {
+                BlocProvider.of<MyBloc>(context).add(MyEvent.Rockets);
               },
             )
           ],
