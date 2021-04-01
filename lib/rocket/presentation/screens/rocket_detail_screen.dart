@@ -66,11 +66,6 @@ class RocketDetailScreen extends StatelessWidget {
                   title: Text('${rocket.mass.kg}kg'),
                   subtitle: Text('total mass'),
                 ),
-              //   ListTile(
-              //     leading: Icon(Icons.line_weight),
-              //     title: Text('${rocket.mass.kg}kg'),
-              //     subtitle: Text('total mass'),
-              //   ),
               ],
             ),
           ),
