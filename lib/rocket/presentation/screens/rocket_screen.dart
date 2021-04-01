@@ -1,4 +1,5 @@
 import 'package:direct_navigation/rocket/bloc/rocket_bloc.dart';
+import 'package:direct_navigation/rocket/presentation/widgets/rocket_list_tile.dart';
 import 'package:direct_navigation/widgets/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,25 +44,7 @@ class _RocketScreenState extends State<RocketScreen> {
           }
           if (state is RocketLoadSuccess) {
             final rockets = state.rockets;
-            return ListView.builder(
-                itemCount: rockets.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: AspectRatio(
-                      aspectRatio: 1,
-                      child: Image.network(
-                        rockets[index].flickrImages.first,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    title: Text(rockets[index].name),
-                    subtitle: Text(
-                      rockets[index].description,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  );
-                });
+            return RocketList(rockets: rockets);
           }
         }),
       ),
